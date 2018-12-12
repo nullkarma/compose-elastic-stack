@@ -1,5 +1,10 @@
 #!/bin/bash
 
+until curl -s -u admin:admin123 http://127.0.0.1:9200 > /dev/null 2>&1 ; do
+    echo "Waiting for elasticsearch"
+    sleep 1
+done
+
 echo "set kibana password"
 
 curl -s -H "Content-Type: application/json" -u admin:admin123 http://127.0.0.1:9200/_xpack/security/user/kibana/_password -d @- <<DATA
